@@ -11,9 +11,7 @@ var setupAjax = function(){
 	
 	xhr.onload = function() {
     if (xhr.status === 200) {
-				console.log("Raw response text: ", xhr.responseText);
         var data = JSON.parse(xhr.responseText);
-				console.log("Parsed text: ", data);
 				appendQueryResult(data);
 				writeCountMsg(data.rowCount, data.colCount);
     }
@@ -37,8 +35,8 @@ var setupAjax = function(){
 var appendQueryResult = function(data) {
 	var rows = data.rows;
 	var cols = data.cols;
+
 	var resultSection = document.getElementById('results');
-	// TODO: Write Sentence about row nums and column numbers
 	resultSection.removeChild(resultSection.lastChild)
 
 	var tableBody = document.createElement('tbody');
@@ -74,6 +72,10 @@ var appendQueryResult = function(data) {
 }
 
 var writeCountMsg = function(rowCount, colCount) {
-	// TODO: Figure out a way to get touch the span tags in the message paragraph
-	console.log("rows: ", rowCount, " cols: ", colCount);
+	var results = document.getElementById('results');
+	var messageP = results.getElementsByTagName('p')[0];
+	messageP.style="";
+	var spans = messageP.getElementsByTagName('span');
+	spans[0].innerHTML = rowCount;
+	spans[1].innerHTML = colCount;
 }
