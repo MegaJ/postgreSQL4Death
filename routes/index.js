@@ -17,31 +17,35 @@ router.post('/', function (req, res) {
 		var rows;
 		pool.query(req.body, function(err, result) {
 
+			// TODO: Refactor error handling to be shorter
       if(err) {
         console.log(err.message, err.stack);
 				rows = err;
 				colCount = 0;
 				rowCount = 0;
+
       } else {
 				rowCount = result.rowCount;
 				colCount = result.fields.length;
 				rows = result.rows;
+			
+
+				var colNames = [];
+				for(var i = 0; i < result.fields.length; i++ ) {
+					colNames[i] = result.fields[i].name;
+				}
+			
+				var results = {
+												rows: rows,
+												cols: colNames,
+												rowCount: rowCount,
+												colCount: colCount
+											}
 			}
 
-			var colNames = [];
-			for(var i = 0; i < result.fields.length; i++ ) {
-				colNames[i] = result.fields[i].name;
-			}
-			
-			var results = {
-											rows: rows,
-											cols: colNames,
-											rowCount: rowCount,
-											colCount: colCount
-										}
 			res.setHeader('Content-Type', 'application/json');
 			res.send(results);
-    	//res.send(JSON.stringify(results));      
+	  	//res.send(JSON.stringify(results));
     });
     
     
