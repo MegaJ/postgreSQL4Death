@@ -1,6 +1,8 @@
 var pg = require('pg');
 var Pool = pg.Pool;
 var fs = require('fs');
+// TODO: I may be using the postgres module very very wrongly: https://github.com/brianc/node-postgres/issues/653
+
 
 var userAndPass = fs.readFileSync('./dbuser.txt', 'utf8');
 var re = /(.*)\n(.*)\n(.*)/;

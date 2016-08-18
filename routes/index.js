@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 /** Expects client to send a text/plain request **/
 router.post('/', function (req, res) {
     
- 		console.log("body: ", req.body);
+		//TODO: If the query returns too many rows, I need to truncate output
 		var rows;
 		pool.query(req.body, function(err, result) {
       // handle an error from the query
@@ -24,22 +24,18 @@ router.post('/', function (req, res) {
 				rowCount = 0;
       } else {
 				rowCount = result.rowCount;
-				rows = JSON.stringify(result.rows);
 				colCount = result.fields.length;
+				rows = JSON.stringify(result.rows);
 			}
-
+			
+			var results = {
+											rows: rows,
+											rowCount: rowCount,
+											colCount: colCount
+										}
 			res.setHeader('Content-Type', 'application/json');
-    	res.send(JSON.stringify(rows));
-			// how send row count and column count?
-        
-			/**	res.render('index.jade', {
-        	layout: false,
-					rows: rows,
-					rowCount: rowCount,
-					colCount: colCount
-    		}); 
-			**/
-      
+			res.send(results);
+    	//res.send(JSON.stringify(results));      
     });
     
     
