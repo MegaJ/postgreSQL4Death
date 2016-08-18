@@ -16,7 +16,7 @@ router.post('/', function (req, res) {
 		//TODO: If the query returns too many rows, I need to truncate output
 		var rows;
 		pool.query(req.body, function(err, result) {
-      // handle an error from the query
+
       if(err) {
         console.log(err.message, err.stack);
 				rows = err;
@@ -25,11 +25,17 @@ router.post('/', function (req, res) {
       } else {
 				rowCount = result.rowCount;
 				colCount = result.fields.length;
-				rows = JSON.stringify(result.rows);
+				rows = result.rows;
+			}
+
+			var colNames = [];
+			for(var i = 0; i < result.fields.length; i++ ) {
+				colNames[i] = result.fields[i].name;
 			}
 			
 			var results = {
 											rows: rows,
+											cols: colNames,
 											rowCount: rowCount,
 											colCount: colCount
 										}

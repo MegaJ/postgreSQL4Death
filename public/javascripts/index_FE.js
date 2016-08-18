@@ -13,7 +13,8 @@ var setupAjax = function(){
     if (xhr.status === 200) {
 				console.log("Raw response text: ", xhr.responseText);
         var data = JSON.parse(xhr.responseText);
-				appendQueryResult(data.rows);
+				console.log("Parsed text: ", data);
+				appendQueryResult(data);
 				writeCountMsg(data.rowCount, data.colCount);
     }
 	};
@@ -33,14 +34,43 @@ var setupAjax = function(){
 	form.addEventListener("submit", submitQuery);	
 }
 
-var appendQueryResult = function(rows) {
+var appendQueryResult = function(data) {
+	var rows = data.rows;
+	var cols = data.cols;
 	var resultSection = document.getElementById('results');
+	// TODO: Write Sentence about row nums and column numbers
 	resultSection.removeChild(resultSection.lastChild)
 
-	// TODO: Add a table instead
-	var newElement = document.createElement('div');
-	newElement.innerHTML = JSON.parse(rows);
-	resultSection.appendChild(newElement);
+	var tableBody = document.createElement('tbody');
+
+	/** Create table header **/
+	var tableHeadRow = document.createElement('tr');
+	for(var i = 0; i < cols.length; i++) {
+		var currColName = cols[i];
+		var column = document.createElement('th');
+		column.innerHTML = currColName;
+		tableHeadRow.appendChild(column);
+	}
+
+	tableBody.appendChild(tableHeadRow);
+	
+	/** Create rest or rows **/
+	for(var i = 0; i < rows.length; i++) {
+		var dataRow = document.createElement('tr');
+		for(var j = 0; j < cols.length; j++) {
+			var currColName = cols[j];
+			var colValue = document.createElement('td');
+			colValue.innerHTML = rows[i][currColName];
+			dataRow.appendChild(colValue);
+		}
+		tableBody.appendChild(dataRow);
+	}
+
+	var newTable = document.createElement('table');
+	newTable.className = "table table-bordered table-striped";
+	newTable.appendChild(tableBody);
+
+	resultSection.appendChild(newTable);
 }
 
 var writeCountMsg = function(rowCount, colCount) {

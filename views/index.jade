@@ -44,42 +44,12 @@ block content
 									input(type="submit", value='Run', class="runButton")
 
 					.section
-						p
-							| There were a total of #[span ] row(s). Each row had #[span ] column(s).
 							#results
-								// dummy div
-								div 
-									table(class="table table-bordered table-striped")
-										tbody
-											tr
-												th entry
-												th entry 2
-												th entry
-												th entry 2
-												th entry
-												th entry 2
-											tr
-												td entry 3
-												td entry 23
-												td entry3
-												td entry 23
-												td entry3
-												td entry 23
-											tr
-												td entry 3
-												td entry 23
-												td entry3
-												td entry 23
-												td entry3
-												td entry 23
-											tr
-												td entry 3
-												td entry 23
-												td entry3
-												td entry 23
-												td entry3
-												td entry 23
-				
+								// This paragraph gets replaced
+								p
+									| There were a total of #[span ] row(s). Each row had #[span ] column(s).
+								// This table gets replaced
+								table(class="table table-bordered table-striped")
 
 	include ./includes/footer.jade
   
