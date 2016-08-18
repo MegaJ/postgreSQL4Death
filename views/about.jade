@@ -1,0 +1,21 @@
+extend layout
+
+	body
+		h1 About
+		#content
+		  p.
+		    This is currently a project in the making. Throughout college, I never really knew how SQL worked, so I started all the SQL exercises on Hackerrank. After a few days, I had finished them all, but didn't know what to do next.
+		  p.
+		    So I searched and searched for a project to work on. I found the WHO Mortality database (they don't seem to release any raw csv for many of their other projects). One night, still unemployed, I had wearily scribbled a design on a sheet of paper.
+		  p.
+		    The concept of PostgreSQL for Death.
+
+		  h2 WHO Database
+		  p.
+		    The data was released by the World Health Organization. They have CSV and Excel files from their 
+		    #[a(href="http://www.who.int/healthinfo/statistics/mortality_rawdata/en/") website].
+		    p. The current mortality data I have loaded is only the morticd7, where the most recent year is 1972. I will try loading the ICD10 and 8 if I want to.
+		    
+		    
+		  
+	include ./includes/footer.jade

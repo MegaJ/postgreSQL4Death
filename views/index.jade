@@ -1,0 +1,55 @@
+extends layout
+
+block frontEndScripts
+	script(data-main="scripts/app" src="scripts/lib/require.js")
+
+block content
+	//- Declaration
+	mixin navItems(titles)
+		each val in titles
+			h4
+				//- Tripped me up. No space is allowed between the equals
+				a(href="#")=val 
+
+	body
+		header
+			//- TODO: Center h1
+			h1.center PostgreSQL for Death
+			//- This is for spacing I guess
+
+			| Perhaps some fancy subheader
+			#content
+				nav(id ="side-bar")
+						- navArray = ["Database Stats", "Qust(ions)", "About", "Contact"];
+						+navItems(navArray)
+
+				#main-content
+					.section Mission
+						div 
+							| How many people were born in the UK in 1956?
+
+					#quest.section
+						canvas#game  
+
+					.section Your query:
+						div
+							form(method="POST" action="/")
+								fieldset
+									label(for="message") Message:
+									textarea(id="message" name="query")
+										| Select * from country_codes;
+									
+
+									input(type="submit", value='Run', class="runButton")
+
+					.section
+						p
+							| There were a total of #{rowCount} row(s). Each row had #{colCount} column(s).
+							#results
+								!= rows
+								
+				
+
+	include ./includes/footer.jade
+  
+  
