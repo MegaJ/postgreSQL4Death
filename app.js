@@ -17,6 +17,7 @@ app.set('view engine', 'jade');
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('node-sass-middleware')({

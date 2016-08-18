@@ -1,7 +1,8 @@
 extends layout
 
 block frontEndScripts
-	script(data-main="scripts/app" src="scripts/lib/require.js")
+	//- script(data-main="scripts/app" src="scripts/lib/require.js")
+	script(src="scripts/index_FE.js")
 
 block content
 	//- Declaration
@@ -33,7 +34,7 @@ block content
 
 					.section Your query:
 						div
-							form(method="POST" action="/")
+							form(id="queryForm" method="POST" action="/")
 								fieldset
 									label(for="message") Message:
 									textarea(id="message" name="query")

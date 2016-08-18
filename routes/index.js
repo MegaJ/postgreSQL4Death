@@ -10,11 +10,12 @@ router.get('/', function (req, res) {
     });
 });
 
+/** Expects client to send a text/plain request **/
 router.post('/', function (req, res) {
-    //analyze what's given from user
- 
+    
+ 		console.log("body: ", req.body);
 		var rows;
-		pool.query(req.body.query, function(err, result) {
+		pool.query(req.body, function(err, result) {
       // handle an error from the query
       if(err) {
         console.log(err.message, err.stack);
@@ -26,13 +27,18 @@ router.post('/', function (req, res) {
 				rows = JSON.stringify(result.rows);
 				colCount = result.fields.length;
 			}
+
+			res.setHeader('Content-Type', 'application/json');
+    	res.send(JSON.stringify(rows));
+			// how send row count and column count?
         
-				res.render('index.jade', {
+			/**	res.render('index.jade', {
         	layout: false,
 					rows: rows,
 					rowCount: rowCount,
 					colCount: colCount
-    		}); // end render 
+    		}); 
+			**/
       
     });
     
