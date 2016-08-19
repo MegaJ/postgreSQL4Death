@@ -11,7 +11,16 @@ router.get('/', function (req, res) {
 });
 
 var handleError = function (err, res) {
-			console.log(err.message, err.stack);
+			console.log(err);
+			console.log("Line number: ", err.line);
+
+			/** TODO: There seems to be nothing in the err object
+					that gives you the correct line number. It gives the position
+					of where it thinks the error occurred though, so I can
+					count the number of newline chars.
+
+					Consider handling this on client side
+			**/
 			res.setHeader('Content-Type', 'application/json');
 			res.send({err: err.message});
 }

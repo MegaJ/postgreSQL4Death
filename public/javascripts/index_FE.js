@@ -104,6 +104,7 @@ var initializeWriteMessage = function(){
 			currP = errorP;
 
 			writeErrorMsg(data.err);
+			hideTable();
 			return false;
 		}
 	
@@ -116,6 +117,12 @@ var initializeWriteMessage = function(){
 		return true;
 	}
 };
+
+var hideTable = function() {
+	var results = document.getElementById('results');
+	var table = results.getElementsByTagName('table')[0];
+	table.style="display:none;"
+}
 
 
 
