@@ -2,6 +2,7 @@
 window.onload = function () {
 	console.log("No need jq!");
 	
+	writeMessage = initializeWriteMessage();
 	setupAjax();
 }
 
@@ -12,8 +13,11 @@ var setupAjax = function(){
 	xhr.onload = function() {
     if (xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
-				appendQueryResult(data);
-				writeCountMsg(data.rowCount, data.colCount);
+				if (data.err) console.log(data.err);
+				if (writeMessage(data)) {
+					appendQueryResult(data);
+				}
+				
     }
 	};
 
@@ -71,11 +75,50 @@ var appendQueryResult = function(data) {
 	resultSection.appendChild(newTable);
 }
 
-var writeCountMsg = function(rowCount, colCount) {
+/** Note, as the software base grows, I may need to make a constructor.
+		I'm pretty sure I will be switching out text quite often with other text.
+		This is also temporary, until I package this function below into a module.
+**/
+var initializeWriteMessage = function(){
 	var results = document.getElementById('results');
-	var messageP = results.getElementsByTagName('p')[0];
-	messageP.style="";
-	var spans = messageP.getElementsByTagName('span');
-	spans[0].innerHTML = rowCount;
-	spans[1].innerHTML = colCount;
-}
+	var successP = results.getElementsByTagName('p')[0];
+	var spans = successP.getElementsByTagName('span');
+
+	var errorP = document.createElement('p');
+	errorP.style="color:red"; // keep until my CSS skills improve
+	var currP = successP;
+
+	var writeErrorMsg = function(err) {
+		errorP.innerHTML = err;
+	}
+
+	var writeTableSummary = function(rowCount, colCount) {
+		currP.style=""; // make p visible
+		spans[0].innerHTML = rowCount;
+		spans[1].innerHTML = colCount;
+	}
+
+	return function (data) {
+		if (data.err) { 
+			results.replaceChild(errorP, currP);
+			currP = errorP;
+
+			writeErrorMsg(data.err);
+			return false;
+		}
+	
+		if (currP === errorP) {
+			results.replaceChild(successP, currP);
+			currP = successP;
+		}
+
+		writeTableSummary(data.rowCount, data.colCount);
+		return true;
+	}
+};
+
+
+
+
+
+

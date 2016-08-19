@@ -36,16 +36,14 @@ block content
 						div
 							form(id="queryForm" method="POST" action="/")
 								fieldset
-									label(for="message") Message:
 									textarea(id="message" name="query")
 										| Select * from country_codes;
-									
 
 									input(type="submit", value='Run', class="runButton")
 
 					.section
 							#results
-								// This paragraph gets replaced
+								// This paragraph becomes unhidden by js
 								p(style="visibility: hidden;")
 									| There were a total of #[span ] row(s). Each row had #[span ] column(s).
 								// This table gets replaced
