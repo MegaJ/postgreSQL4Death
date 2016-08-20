@@ -6,16 +6,6 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-div {
-  margin-top: 1em; }
-
-fieldset {
-  margin-right: 0px;
-  margin-left: 0px; }
-
-textarea {
-  width: 100em; }
-
 a {
   color: #00B7FF; }
 
@@ -23,25 +13,21 @@ a {
   text-align: center; }
 
 nav {
-  width: 25%;
+  width: 10%;
   float: left; }
 
 #main-content {
-  margin-left: 25%; }
+  margin-left: 10%; }
 
 .section {
-  color: red;
-  text-align: right; }
-  .section div {
-    margin-left: 5%;
-    color: black;
-    text-align: left; }
-  .section p {
-    color: black; }
+  margin-top: 1em; }
+  .section .section-header {
+    text-align: right; }
 
 canvas {
-  width: 100%;
-  height: 60%; }
+  width: 480px;
+  height: 320px;
+  background-color: #100000; }
 
 table {
   border-collapse: collapse;
@@ -87,17 +73,40 @@ table {
   color: green;
   font-weight: bold; }
 
+fieldset {
+  border: medium none;
+  margin: 0px;
+  padding: 0px;
+  border: none; }
+
+#sql-ui-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start; }
+  #sql-ui-flex > * {
+    margin-top: 1em; }
+  #sql-ui-flex > :first-child {
+    flex: 2;
+    margin: 1em; }
+    #sql-ui-flex > :first-child textarea {
+      width: 100%;
+      height: 100%; }
+  #sql-ui-flex > :last-child {
+    margin-right: 1em;
+    flex: 1; }
+
+.div-bordered {
+  border-width: 1px;
+  border-style: solid; }
+
+textarea {
+  resize: none; }
+
 footer {
   margin-top: 1em; }
 
-textarea {
-  resize: none;
-  vertical-align: top;
-  width: 50em;
-  height: 10em; }
-
 .runButton {
-  display: block;
   -moz-box-shadow: inset 0px 1px 0px 0px #caefab;
   -webkit-box-shadow: inset 0px 1px 0px 0px #caefab;
   box-shadow: inset 0px 1px 0px 0px #caefab;

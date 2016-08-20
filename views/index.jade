@@ -12,6 +12,10 @@ block content
 				//- Tripped me up. No space is allowed between the equals
 				a(href="#")=val 
 
+	mixin showTablesButtons(tableNames)
+		each val in tableNames
+			button=val
+
 	body
 		header.center-text
 			//- TODO: Center h1
@@ -23,21 +27,30 @@ block content
 					+navItems(navArray)
 
 			#main-content
-				.section Mission
-					div 
-						| How many people were born in the UK in 1956?
+				.section 
+					div.section-header 
+						| Mission
+					span How many people were born in the UK in 1956?
 
 				#quest.section
 					canvas#game  
 
-			.section Your query:
-				div
-					form(id="queryForm" method="POST" action="/")
-						fieldset
-							textarea(id="message" name="query")
-								| Select * from country_codes;
-							input(type="submit", value='Run', class="runButton")
-
+			.section 
+				div.section-header
+					| Query
+				div#sql-ui-flex.div-bordered
+					div
+						div
+							input(id="queryname" value="New Query Name" type="text")
+						form(id="queryForm" method="POST" action="/")
+							fieldset
+								textarea(id="message" name="query")
+									| Select * from country_codes;
+								input(type="submit", value='Run', class="runButton")
+					div.div-bordered
+						//- jade block unbuffered code actually fails in 1.11 for me.
+						-	tableNames = ["avail_mortality", "avail_pop", "country_codes", "morticd7", "notes", "population"]				
+						+showTablesButtons(tableNames)
 			.section
 					#results
 						// This paragraph becomes unhidden by js

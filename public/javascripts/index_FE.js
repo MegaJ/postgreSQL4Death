@@ -32,8 +32,13 @@ var setupAjax = function(){
 		console.log("query: ", query)
 		xhr.send(query);
 	}
+	
+	/** TODO: I want 3 form listeners: "run,", "delete", "save" 
+			and I want it to save text in the database, or delete it.
+			Renaming the event that is fired doesn't work.
+	**/
+	form.addEventListener("submit", submitQuery);
 
-	form.addEventListener("submit", submitQuery);	
 }
 
 var appendQueryResult = function(data) {
