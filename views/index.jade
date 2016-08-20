@@ -35,22 +35,20 @@ block content
 				#quest.section
 					canvas#game  
 
-			.section 
-				div.section-header
-					| Query
-				div#sql-ui-flex.div-bordered
-					div
+				.section 
+					div.section-header
+					div#sql-ui-flex.div-bordered
 						div
 							input(id="queryname" value="New Query Name" type="text")
-						form(id="queryForm" method="POST" action="/")
-							fieldset
-								textarea(id="message" name="query")
-									| Select * from country_codes;
-								input(type="submit", value='Run', class="runButton")
-					div.div-bordered
-						//- jade block unbuffered code actually fails in 1.11 for me.
-						-	tableNames = ["avail_mortality", "avail_pop", "country_codes", "morticd7", "notes", "population"]				
-						+showTablesButtons(tableNames)
+							form(id="queryForm" method="POST" action="/")
+								fieldset
+									textarea(id="message" name="query")
+										| Select * from country_codes;
+									input(type="submit", value='Run', class="runButton")
+						div.div-bordered
+							//- jade block unbuffered code actually fails in 1.11 for me.
+							-	tableNames = ["avail_mortality", "avail_pop", "country_codes", "morticd7", "notes", "population"]				
+							+showTablesButtons(tableNames)
 			.section
 					#results
 						// This paragraph becomes unhidden by js
