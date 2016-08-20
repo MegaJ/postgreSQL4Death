@@ -13,41 +13,38 @@ block content
 				a(href="#")=val 
 
 	body
-		header
+		header.center-text
 			//- TODO: Center h1
-			h1.center PostgreSQL for Death
-			//- This is for spacing I guess
+			h1 PostgreSQL for Death
+			p A side-scrolling SQL adventure exploring world wide morbidity since 1950 through the WHO Morbidity database.
+		#content
+			nav(id ="side-bar")
+					- navArray = ["Database Stats", "Quest(ion)s", "About", "Contact"];
+					+navItems(navArray)
 
-			| Perhaps some fancy subheader
-			#content
-				nav(id ="side-bar")
-						- navArray = ["Database Stats", "Quest(ion)s", "About", "Contact"];
-						+navItems(navArray)
+			#main-content
+				.section Mission
+					div 
+						| How many people were born in the UK in 1956?
 
-				#main-content
-					.section Mission
-						div 
-							| How many people were born in the UK in 1956?
+				#quest.section
+					canvas#game  
 
-					#quest.section
-						canvas#game  
+			.section Your query:
+				div
+					form(id="queryForm" method="POST" action="/")
+						fieldset
+							textarea(id="message" name="query")
+								| Select * from country_codes;
+							input(type="submit", value='Run', class="runButton")
 
-					.section Your query:
-						div
-							form(id="queryForm" method="POST" action="/")
-								fieldset
-									textarea(id="message" name="query")
-										| Select * from country_codes;
-
-									input(type="submit", value='Run', class="runButton")
-
-					.section
-							#results
-								// This paragraph becomes unhidden by js
-								p(style="visibility: hidden;")
-									| There were a total of #[span ] row(s). Each row had #[span ] column(s).
-								// This table gets replaced
-								table(class="table table-bordered table-striped")
+			.section
+					#results
+						// This paragraph becomes unhidden by js
+						p(style="visibility: hidden;")
+							| There were a total of #[span ] row(s). Each row had #[span ] column(s).
+						// This table gets replaced
+						table(class="table table-bordered table-striped")
 
 	include ./includes/footer.jade
   
