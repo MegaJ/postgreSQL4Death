@@ -46,7 +46,8 @@ var appendQueryResult = function(data) {
 	var cols = data.cols;
 
 	var resultSection = document.getElementById('results');
-	resultSection.removeChild(resultSection.lastChild)
+	var tableContainer = resultSection.lastChild;
+	tableContainer.removeChild(tableContainer.lastChild)
 
 	var tableBody = document.createElement('tbody');
 
@@ -77,7 +78,7 @@ var appendQueryResult = function(data) {
 	newTable.className = "table table-bordered table-striped";
 	newTable.appendChild(tableBody);
 
-	resultSection.appendChild(newTable);
+	tableContainer.appendChild(newTable);
 }
 
 /** Note, as the software base grows, I may need to make a constructor.

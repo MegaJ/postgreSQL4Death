@@ -8,7 +8,7 @@ block content
 	//- Declaration
 	mixin navItems(titles)
 		each val in titles
-			h4
+			h5
 				//- Tripped me up. No space is allowed between the equals
 				a(href="#")=val 
 
@@ -27,15 +27,15 @@ block content
 					+navItems(navArray)
 
 			#main-content
-				.section 
+				section 
 					div.section-header 
 						| Mission
 					span How many people were born in the UK in 1956?
 
-				#quest.section
+				#quest
 					canvas#game  
 
-				.section 
+				section 
 					div.section-header
 					div#sql-ui-flex.div-bordered
 						div
@@ -49,13 +49,15 @@ block content
 							//- jade block unbuffered code actually fails in 1.11 for me.
 							-	tableNames = ["avail_mortality", "avail_pop", "country_codes", "morticd7", "notes", "population"]				
 							+showTablesButtons(tableNames)
-			.section
+			section
 					#results
 						// This paragraph becomes unhidden by js
 						p(style="visibility: hidden;")
 							| There were a total of #[span ] row(s). Each row had #[span ] column(s).
-						// This table gets replaced
-						table(class="table table-bordered table-striped")
+						
+						div.table-container
+							// This table gets replaced
+							table(class="table table-bordered table-striped")
 
 	include ./includes/footer.jade
   
