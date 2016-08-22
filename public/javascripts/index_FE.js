@@ -75,7 +75,7 @@ var appendQueryResult = function(data) {
 	}
 
 	var newTable = document.createElement('table');
-	newTable.className = "table table-bordered table-striped";
+	newTable.className = "table table-bordered table-striped table-shadow";
 	newTable.appendChild(tableBody);
 
 	tableContainer.appendChild(newTable);

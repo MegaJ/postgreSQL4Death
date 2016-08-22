@@ -1,3 +1,6 @@
+$midtone: #e1d7c1;
+$ui-text-color: #ba9494;
+
 * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -9,7 +12,12 @@ body {
 			background-color: #fff;
 }
 
-
+.font-big {
+	font-size: 50px;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+	font-weight: 300;
+	line-height: 50px;
+}
 
 a {
   color: #00B7FF;
@@ -26,7 +34,7 @@ header {
 nav {
 	text-align: center;
 	background-color: #f1f1f1;
-	padding: 12px 0;
+	//padding: 12px 0;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -34,22 +42,32 @@ nav {
 	user-select: none;
 	width: 900px;
 	margin: 0 auto;
-	border-bottom: 1px solid #ccc;
 	width: 100%;
 	display: flex;
 	font-family: 'Montserrat', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 	
-
+	
 	h5 {
-		margin: auto;
-		padding: 0;
+		margin: 0;
+		padding: 0.75em;
 		flex: 1;
+		border: 3px solid transparent;
+
+		a {
+			text-decoration: none;
+			color: #46484d;
+		}
 	}
 
-	a {
-		text-decoration: none;
-		color: #46484d;
+	h5:hover {
+			border-left: none;
+			border-right: none;
+			border-bottom: 3px solid black;
+			margin-left: 3px;
+			margin-right: 3px;
 	}
+
+	
 }
 
 #content {
@@ -59,7 +77,7 @@ nav {
 
 #main-content {
 	background-color: rgb(55, 55, 59);
-	color: #bfbfbf;
+	color: #ba9494;
 }
 
 section {
@@ -71,7 +89,7 @@ section {
 
 #quest {
 	display: flex;
-
+	
 }
 
 canvas {
@@ -90,8 +108,13 @@ canvas {
 	}
 }
 
+.shadow-box {
+	box-shadow: 0px 0px 8px 2px black;
+}
+
 .table-container {
-	overflow-x: scroll;
+	max-height: 100vh;
+	overflow-y: scroll;
 }
 
 fieldset {
@@ -101,7 +124,13 @@ fieldset {
 	border: none;
 }
 
+.round-box {
+	border-radius: 4px;
+}
+
 #sql-ui-flex {
+	background-color: #3E3E3E;
+	margin-top: 0.5em;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -128,6 +157,23 @@ fieldset {
 		overflow-y: scroll;
 	}
 
+}
+
+.inset-shadow {
+	box-shadow: 0 0 5px 2px #ada0a0 inset;
+	border-radius: 3px;
+	border: medium none;
+	padding: 2px 2px;
+	border-top: 1px solid #6d6060;
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-left: 1px solid #6d6060;
+}
+
+input:hover, textarea:hover {
+  box-shadow: 0px 1px 8px #F48004;
+  -webkit-box-shadow: 0px 1px 8px #F48004;
+  -moz-box-shadow: 0px 1px 8px #F48004;
 }
 
 .div-bordered {

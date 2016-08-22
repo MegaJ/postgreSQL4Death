@@ -1,0 +1,8 @@
+Future tasks:
+
+Fire multiple queries, return multiple tables
+
+Make Run, Save, Delete button
+Have a simple carousel
+About/Contact, should swap out the entire page with some sort of subpage
+Find a better way to scroll / view data from a large table. Having a top scroll bar is hard to do

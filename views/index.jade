@@ -28,21 +28,21 @@ block content
 
 			#main-content
 				section 
-					div.section-header 
+					div.section-header.font-big
 						| Mission
 					span How many people were born in the UK in 1956?
 
 				#quest
-					canvas#game  
+					canvas#game.shadow-box
 
 				section 
 					div.section-header
-					div#sql-ui-flex.div-bordered
+					div#sql-ui-flex
 						div
-							input(id="queryname" value="New Query Name" type="text")
+							input(id="queryname" value="New Query Name" type="text").inset-shadow
 							form(id="queryForm" method="POST" action="/")
 								fieldset
-									textarea(id="message" name="query")
+									textarea(id="message" name="query").inset-shadow
 										| Select * from country_codes;
 									input(type="submit", value='Run', class="runButton")
 						div.div-bordered
@@ -52,8 +52,9 @@ block content
 			section
 					#results
 						// This paragraph becomes unhidden by js
-						p(style="visibility: hidden;")
-							| There were a total of #[span ] row(s). Each row had #[span ] column(s).
+						div
+							p(style="visibility: hidden;")
+								| There were a total of #[span ] row(s). Each row had #[span ] column(s).
 						
 						div.table-container
 							// This table gets replaced
