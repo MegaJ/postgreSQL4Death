@@ -41,25 +41,35 @@ var setupAjax = function(){
 
 }
 
+/** Complexity comes from the table headers being detached
+		from the actual table
+**/
+var makeFixedTableHeaders = function(colNames) {
+	var tableHead = document.createElement('thead');
+	var tableHeadRow = document.createElement('tr');
+	for(var i = 0; i < colNames.length; i++) {
+		var currColName = colNames[i];
+		var absolutelyPositionedDiv = document.createElement('div'); // could be a function in itself
+		absolutelyPositionedDiv.className = "th-inner";
+		absolutelyPositionedDiv.innerHTML = currColName;
+
+		var column = document.createElement('th');
+		column.appendChild(absolutelyPositionedDiv);
+		tableHeadRow.appendChild(column);
+	}
+	tableHead.appendChild(tableHeadRow);
+	return tableHead;
+}
+
 var appendQueryResult = function(data) {
 	var rows = data.rows;
 	var cols = data.cols;
 
-	var resultSection = document.getElementById('results');
-	var tableContainer = resultSection.lastChild;
-	tableContainer.removeChild(tableContainer.lastChild)
+	var resultSection = document.getElementById('data-body-js'); // add table to this
+	resultSection.removeChild(resultSection.lastChild);
 
 	/** Create table header **/
-	var tableHead = document.createElement('thead');
-	var tableHeadRow = document.createElement('tr');
-	for(var i = 0; i < cols.length; i++) {
-		var currColName = cols[i];
-		var column = document.createElement('th');
-		column.innerHTML = currColName;
-		tableHeadRow.appendChild(column);
-	}
-
-	tableHead.appendChild(tableHeadRow);
+	var tableHead = makeFixedTableHeaders(cols);
 	
 	/** Create rest or rows **/
 	var tableBody = document.createElement('tbody');
@@ -79,7 +89,7 @@ var appendQueryResult = function(data) {
 	newTable.appendChild(tableHead);	
 	newTable.appendChild(tableBody);
 	
-	tableContainer.appendChild(newTable);
+	resultSection.appendChild(newTable);
 }
 
 /** Note, as the software base grows, I may need to make a constructor.

@@ -7,12 +7,43 @@ table {
 	background-color: #323C50;
 }
 
+
+.table-container {
+	padding-top: 30px; // how to get 1 cell height?
+	margin-left: 3em;
+	margin-right: 3em;
+	position: relative;
+}
+
+.fixed-header-table {
+	overflow-y: auto;
+	max-height: 80vh; // don't let the table be too long.
+}
+
+.th-inner {
+	position: absolute;
+	top: 0;	
+}
+
+.header-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 30px;
+	background-color: #1b1e24;
+}
+
 .table {
+	width: 100%;
+	overflow-x: scroll;
 	th {
-		font-weight: 400;
+		vertical-align: top;
+		padding: 0; // this is needed
 		background-color: #1b1e24;
 	}
-	th, td {
+	td {
+		//min-width: 3em; // header can be clipped if td is too short
 		padding: 8px;
 		line-height: 20px;
 		text-align: left;
@@ -20,10 +51,6 @@ table {
 		border-top: 1px solid #ddd;
 	}
 }
-
-//.table-fixed-header {
-//	table-layout: fixed;
-//}
 
 .table-striped  {
 	tbody > tr:nth-child(2n+1) > td {
