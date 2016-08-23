@@ -51,7 +51,8 @@ nav {
 		margin: 0;
 		padding: 0.75em;
 		flex: 1;
-		border: 3px solid transparent;
+		border-top: 3px solid transparent;
+		border-bottom: 3px solid transparent;
 
 		a {
 			text-decoration: none;
@@ -60,11 +61,7 @@ nav {
 	}
 
 	h5:hover {
-			border-left: none;
-			border-right: none;
 			border-bottom: 3px solid black;
-			margin-left: 3px;
-			margin-right: 3px;
 	}
 
 	

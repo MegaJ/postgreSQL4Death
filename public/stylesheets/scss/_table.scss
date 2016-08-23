@@ -10,6 +10,7 @@ table {
 .table {
 	th {
 		font-weight: 400;
+		background-color: #1b1e24;
 	}
 	th, td {
 		padding: 8px;
@@ -20,12 +21,16 @@ table {
 	}
 }
 
+//.table-fixed-header {
+//	table-layout: fixed;
+//}
+
 .table-striped  {
 	tbody > tr:nth-child(2n+1) > td {
 		background-color: #2C3446; 
 	}
 
-	tbody > tr:nth-child(2n+1) > th {
+	tbody > tr:nth-child(2n) > td {
 		background-color: #323C50;
 	}
 } 
@@ -42,6 +47,7 @@ table {
 		border-left: 1px solid #323C50;
 	}
 
+	// TODO: make borders round again
 	tbody:first-child {
 
 			tr:first-child th {

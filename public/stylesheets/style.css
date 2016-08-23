@@ -39,16 +39,13 @@ nav {
     margin: 0;
     padding: 0.75em;
     flex: 1;
-    border: 3px solid transparent; }
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent; }
     nav h5 a {
       text-decoration: none;
       color: #46484d; }
   nav h5:hover {
-    border-left: none;
-    border-right: none;
-    border-bottom: 3px solid black;
-    margin-left: 3px;
-    margin-right: 3px; }
+    border-bottom: 3px solid black; }
 
 #content {
   min-width: 320px; }
@@ -76,7 +73,8 @@ table {
   background-color: #323C50; }
 
 .table th {
-  font-weight: 400; }
+  font-weight: 400;
+  background-color: #1b1e24; }
 
 .table th, .table td {
   padding: 8px;
@@ -88,7 +86,7 @@ table {
 .table-striped tbody > tr:nth-child(2n+1) > td {
   background-color: #2C3446; }
 
-.table-striped tbody > tr:nth-child(2n+1) > th {
+.table-striped tbody > tr:nth-child(2n) > td {
   background-color: #323C50; }
 
 .table-bordered {

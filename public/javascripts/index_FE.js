@@ -49,9 +49,8 @@ var appendQueryResult = function(data) {
 	var tableContainer = resultSection.lastChild;
 	tableContainer.removeChild(tableContainer.lastChild)
 
-	var tableBody = document.createElement('tbody');
-
 	/** Create table header **/
+	var tableHead = document.createElement('thead');
 	var tableHeadRow = document.createElement('tr');
 	for(var i = 0; i < cols.length; i++) {
 		var currColName = cols[i];
@@ -60,9 +59,10 @@ var appendQueryResult = function(data) {
 		tableHeadRow.appendChild(column);
 	}
 
-	tableBody.appendChild(tableHeadRow);
+	tableHead.appendChild(tableHeadRow);
 	
 	/** Create rest or rows **/
+	var tableBody = document.createElement('tbody');
 	for(var i = 0; i < rows.length; i++) {
 		var dataRow = document.createElement('tr');
 		for(var j = 0; j < cols.length; j++) {
@@ -76,8 +76,9 @@ var appendQueryResult = function(data) {
 
 	var newTable = document.createElement('table');
 	newTable.className = "table table-bordered table-striped table-shadow";
+	newTable.appendChild(tableHead);	
 	newTable.appendChild(tableBody);
-
+	
 	tableContainer.appendChild(newTable);
 }
 
