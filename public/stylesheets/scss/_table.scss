@@ -20,12 +20,15 @@ table {
 
 // the visible one
 #table-header {
-	//position: absolute;
 	overflow:hidden;
 	
 	th {
 		padding: 8px;
 	}
+}
+
+#visible-header {
+	position: relative;
 }
 
 

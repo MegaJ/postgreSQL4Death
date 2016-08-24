@@ -4,6 +4,9 @@ window.onload = function () {
 	
 	writeMessage = initializeWriteMessage();
 	setupAjax();
+
+	var dataBody = document.getElementById("data-body-js");
+	dataBody.addEventListener("scroll", scrollVisibleHeader());
 }
 
 /** Front end js to handle AJAX **/
@@ -111,13 +114,22 @@ var setVisibleTableHeaderWidths = function(hiddenTH, visibleThead) {
 
 		var visibleHeader = document.createElement('th');
 		visibleHeader.innerHTML = innerDiv.innerHTML;
-		visibleHeader.setAttribute("style", "width:" + width + "px");
+		visibleHeader.setAttribute("style", "width:" + width + "px"); 
 		visibleHeader.style.width = width + "px";
+		// width property doesn't work on FF and Chrome, but min-width does
 		visibleHeader.setAttribute("style", "min-width:" + width + "px");
 		visibleHeader.style["min-width"] = width + "px";
 		visibleTR.appendChild(visibleHeader);
 	}
 	visibleThead.appendChild(visibleTR);
+}
+
+var scrollVisibleHeader = function () {
+	//var dataBody = evt.target; var dataBody = document.getElementById("data-body-js");
+	var visibleHeader = document.getElementById("visible-header");
+	return function (evt) {
+		visibleHeader.style.left = -evt.target.scrollLeft + "px";
+	}
 }
 
 /** Note, as the software base grows, I may need to make a constructor.
