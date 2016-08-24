@@ -8,6 +8,7 @@ table {
 }
 
 .table-container {
+	overflow: hidden;
 	margin-left: 3em;
 	margin-right: 3em;
 	position: relative;
@@ -20,7 +21,7 @@ table {
 
 // the visible one
 #table-header {
-	overflow:hidden;
+	position: relative;
 	
 	th {
 		padding: 8px;
@@ -31,6 +32,9 @@ table {
 	position: relative;
 }
 
+#data-body-js {
+	overflow-x: scroll;
+}
 
 .th-inner {
 	position: absolute;

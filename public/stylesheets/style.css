@@ -73,6 +73,7 @@ table {
   background-color: #323C50; }
 
 .table-container {
+  overflow: hidden;
   margin-left: 3em;
   margin-right: 3em;
   position: relative; }
@@ -82,12 +83,15 @@ table {
   max-height: 80vh; }
 
 #table-header {
-  overflow: hidden; }
+  position: relative; }
   #table-header th {
     padding: 8px; }
 
 #visible-header {
   position: relative; }
+
+#data-body-js {
+  overflow-x: scroll; }
 
 .th-inner {
   position: absolute;

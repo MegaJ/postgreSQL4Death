@@ -126,9 +126,9 @@ var setVisibleTableHeaderWidths = function(hiddenTH, visibleThead) {
 
 var scrollVisibleHeader = function () {
 	//var dataBody = evt.target; var dataBody = document.getElementById("data-body-js");
-	var visibleHeader = document.getElementById("visible-header");
+	var tableHeader = document.getElementById("table-header");
 	return function (evt) {
-		visibleHeader.style.left = -evt.target.scrollLeft + "px";
+		tableHeader.style.left = -evt.target.scrollLeft + "px";
 	}
 }
 
