@@ -44,7 +44,13 @@ block content
 								fieldset
 									textarea(id="message" name="query").inset-shadow
 										| Select * from country_codes;
-									input(type="submit", value='Run', class="runButton")
+									div#button-container
+										div.bunch-left
+											input(id="Test-Run" type="button", value='Test Run', class="runButton")
+											input(id="Run" type="button", value='Run')
+											input(id="Save" type="button", value='Save')
+										div.bunch-right
+											input(id="Delete" type="button", value='Delete')
 						div.div-bordered
 							//- jade block unbuffered code actually fails in 1.11 for me.
 							-	tableNames = ["avail_mortality", "avail_pop", "country_codes", "morticd7", "notes", "population"]				

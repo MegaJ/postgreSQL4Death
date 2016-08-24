@@ -13,9 +13,6 @@ body {
   font-weight: 300;
   line-height: 50px; }
 
-a {
-  color: #00B7FF; }
-
 .center-text {
   text-align: center; }
 
@@ -202,6 +199,16 @@ textarea {
 
 footer {
   margin-top: 1em; }
+
+#button-container {
+  display: flex; }
+  #button-container .bunch-left {
+    display: flex;
+    flex: 2; }
+  #button-container .bunch-right {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end; }
 
 .runButton {
   -moz-box-shadow: inset 0px 1px 0px 0px #caefab;

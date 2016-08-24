@@ -36,10 +36,13 @@ var setupAjax = function(){
 		xhr.send(query);
 	}
 	
-	/** TODO: I want 3 form listeners: "run,", "delete", "save" 
+	/** TODO: I want 4 form listeners: "test run", "run,", "delete", "save" 
 			and I want it to save text in the database, or delete it.
-			Renaming the event that is fired doesn't work.
+			Test run does what I have it doing now--it doesn't interact with canvas.
+			Run however does.
 	**/
+
+	
 	form.addEventListener("submit", submitQuery);
 
 }
@@ -75,7 +78,7 @@ var appendQueryResult = function(data) {
 	var tableHead = makeFixedTableHeaders(cols);
 	tableHead.id = 'hidden-header';
 
-	/** Create rest or rows **/
+	/** Create rest of rows **/
 	var tableBody = document.createElement('tbody');
 	for(var i = 0; i < rows.length; i++) {
 		var dataRow = document.createElement('tr');
