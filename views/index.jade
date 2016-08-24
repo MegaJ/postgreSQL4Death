@@ -57,19 +57,50 @@ block content
 								| There were a total of #[span ] row(s). Each row had #[span ] column(s).
 						
 						div.table-container
-							div.header-background
+							// not part of the actual data table, just a table for headers only
+							// the th elements have their width set every time on resize, and when new data is loaded
+							div#table-header
+								table
+									thead#visible-header
+										// this gets replaced everytime
+										tr
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											th Head1
+											th Head2
+											
 							div#data-body-js.fixed-header-table 
 								// everything here gets replaced
 								table(class="table table-bordered table-striped")
-									thead
+									thead#hidden-header
 										tr
 											th
-												div.th-inner Head1
+												div.th-inner Head3
 											th
-												div.th-inner Head2
+												div.th-inner HEAAADDOOOOOOO
 									tbody
 										tr
-											td hi
+											td Gwarsh
 											td bye
 										tr
 											td hi

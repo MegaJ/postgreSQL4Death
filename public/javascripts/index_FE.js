@@ -70,7 +70,8 @@ var appendQueryResult = function(data) {
 
 	/** Create table header **/
 	var tableHead = makeFixedTableHeaders(cols);
-	
+	tableHead.id = 'hidden-header';
+
 	/** Create rest or rows **/
 	var tableBody = document.createElement('tbody');
 	for(var i = 0; i < rows.length; i++) {
@@ -90,6 +91,33 @@ var appendQueryResult = function(data) {
 	newTable.appendChild(tableBody);
 	
 	resultSection.appendChild(newTable);
+
+	var visibleHeader = document.getElementById('visible-header');
+	var hiddenHeader = document.getElementById('hidden-header');
+	setVisibleTableHeaderWidths(hiddenHeader, visibleHeader);
+}
+
+var setVisibleTableHeaderWidths = function(hiddenTH, visibleThead) {
+	var hiddenTR = hiddenTH.childNodes[0];
+	var hiddenTHs = hiddenTR.childNodes;
+
+	visibleThead.removeChild(visibleThead.lastChild); // delete the table row
+	var visibleTR = document.createElement('tr');
+	for (var i = 0; i < hiddenTHs.length; i++) {
+		var current_th = hiddenTHs[i];
+		var width = current_th.offsetWidth;
+		
+		var innerDiv = current_th.getElementsByTagName('div')[0];
+
+		var visibleHeader = document.createElement('th');
+		visibleHeader.innerHTML = innerDiv.innerHTML;
+		visibleHeader.setAttribute("style", "width:" + width + "px");
+		visibleHeader.style.width = width + "px";
+		visibleHeader.setAttribute("style", "min-width:" + width + "px");
+		visibleHeader.style["min-width"] = width + "px";
+		visibleTR.appendChild(visibleHeader);
+	}
+	visibleThead.appendChild(visibleTR);
 }
 
 /** Note, as the software base grows, I may need to make a constructor.

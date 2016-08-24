@@ -7,9 +7,7 @@ table {
 	background-color: #323C50;
 }
 
-
 .table-container {
-	padding-top: 30px; // how to get 1 cell height?
 	margin-left: 3em;
 	margin-right: 3em;
 	position: relative;
@@ -20,30 +18,36 @@ table {
 	max-height: 80vh; // don't let the table be too long.
 }
 
-.th-inner {
-	position: absolute;
-	top: 0;	
+// the visible one
+#table-header {
+	//position: absolute;
+	overflow:hidden;
+	
+	th {
+		padding: 8px;
+	}
 }
 
-.header-background {
+
+.th-inner {
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 30px;
-	background-color: #1b1e24;
+	//top: 0;
+	padding: 8px;
+}
+
+#hidden-header {
+	visibility: hidden;
 }
 
 .table {
 	width: 100%;
-	overflow-x: scroll;
 	th {
 		vertical-align: top;
 		padding: 0; // this is needed
 		background-color: #1b1e24;
 	}
 	td {
-		//min-width: 3em; // header can be clipped if td is too short
+		min-width: 7em; // header can be clipped if td is too short
 		padding: 8px;
 		line-height: 20px;
 		text-align: left;

@@ -73,7 +73,6 @@ table {
   background-color: #323C50; }
 
 .table-container {
-  padding-top: 30px;
   margin-left: 3em;
   margin-right: 3em;
   position: relative; }
@@ -82,26 +81,26 @@ table {
   overflow-y: auto;
   max-height: 80vh; }
 
+#table-header {
+  overflow: hidden; }
+  #table-header th {
+    padding: 8px; }
+
 .th-inner {
   position: absolute;
-  top: 0; }
+  padding: 8px; }
 
-.header-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background-color: #1b1e24; }
+#hidden-header {
+  visibility: hidden; }
 
 .table {
-  width: 100%;
-  overflow-x: scroll; }
+  width: 100%; }
   .table th {
     vertical-align: top;
     padding: 0;
     background-color: #1b1e24; }
   .table td {
+    min-width: 7em;
     padding: 8px;
     line-height: 20px;
     text-align: left;
