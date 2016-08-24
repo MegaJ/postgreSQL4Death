@@ -150,7 +150,7 @@ var initializeWriteMessage = function(){
 	}
 
 	var writeTableSummary = function(rowCount, colCount) {
-		currP.style=""; // make p visible
+		currP.style.visibility ="visible"; // make p visible
 		spans[0].innerHTML = rowCount;
 		spans[1].innerHTML = colCount;
 	}
