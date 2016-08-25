@@ -5,10 +5,14 @@ var handleQuery = function(req, res) {
 	var body = req.body;
 	switch(body.type) {
 		case 'Save':
-			// TODO: Save query
+			// TODO: Save query. NOTE: You will have to set up another 
+			// database user who will be able to SELECT / UPDATE / DELETE / INSERT users
+			// on a users table. Thus, may need another module to connect to my database
+			//queryUsersDB(req, res, body.query, customizeSaveResult);
 			break;
 		case 'Delete':
 			// TODO: Delete the query from the user's saved queries
+			//queryUsersDB(req, res, body.query, customizeDeleteResult);
 			break;
 		case 'Test Run':
 			queryDB(req, res, body.query, customizeTestRunResult);
@@ -43,14 +47,14 @@ var handleError = function (err, res) {
 }
 
 /** This function is ONLY called as a database callback, and uses fn as another callback.
- 		fn MUST use the (err, result) function signature. 
+ 		fn MUST use the (result) function signature. 
 		Currently performs closure on 'customize-' functions
 **/
 var closeFunctionOnRes = function(res, fn) {
 	return function (err, dbResult) {
 		if(err) return handleError(err, res);
 
-		var customizedJSON = fn(err, dbResult);
+		var customizedJSON = fn(dbResult);
 		res.setHeader('Content-Type', 'application/json');
 		res.send(customizedJSON);	
 	}
@@ -61,25 +65,29 @@ var closeFunctionOnRes = function(res, fn) {
 		so that front end can have logic for different behavior:
 		Example: Flash a message that said save complete
 **/
-var customizeTestRunResult = function(err, dbResult) {
-	var resultJSON = buildTableResults(err, dbResult);
+var customizeTestRunResult = function(dbResult) {
+	var resultJSON = buildTableResults(dbResult);
+	resultJSON.type = 'Test Run';
 	return resultJSON;
 }
 
-var customizeRunResult = function(err, dbResult) {
-	var resultJSON = customizeTestRunResult(err, dbResult);
+var customizeRunResult = function(dbResult) {
+	var resultJSON = customizeTestRunResult(dbResult);
+	resultJSON.type = 'Run';
 	//TODO: Now add stuff to resultJSON for the canvas
 	return resultJSON;
 }
 
-var customizeSaveResult = function(err, dbResult) {
+var customizeSaveResult = function(dbResult) {
 	//TODO: Fill in
-	return {Save: 'Save Complete!'}
+		return {type: 'Save',
+						 msg: 'Save complete!'}
 }
 
-var customizeDeleteResult = function(err, dbResult) {
+var customizeDeleteResult = function(dbResult) {
 	//TODO: Fill in
-	return {msg: 'Delete successful!'}
+	return {type: 'Delete',
+					 msg: 'Delete successful!'}
 }
 
 var queryDB = function(req, res, query, callback) {
@@ -87,17 +95,23 @@ var queryDB = function(req, res, query, callback) {
 	pool.query(query, closeFunctionOnRes(res, callback));
 }
 
+var queryUsersDB = function(req, res, query, callback) {
+	console.log("Users query: ", query);
+	// TODO: Implement
+	// userPool.query(query, closeFunctionOnRes(res, callback));
+}
+
 
 //TODO: If the query returns too many rows, I need to truncate output
-var buildTableResults = function(err, result) {
+var buildTableResults = function(dbResult) {
 
-	var rowCount = result.rowCount;
-	var colCount = result.fields.length;
-	var rows = result.rows;
+	var rowCount = dbResult.rowCount;
+	var colCount = dbResult.fields.length;
+	var rows = dbResult.rows;
 	var colNames = [];
 
-	for(var i = 0; i < result.fields.length; i++ ) {
-		colNames[i] = result.fields[i].name;
+	for(var i = 0; i < dbResult.fields.length; i++ ) {
+		colNames[i] = dbResult.fields[i].name;
 	}
 
 	var results = {

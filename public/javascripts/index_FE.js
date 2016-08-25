@@ -15,12 +15,9 @@ var setupAjax = function(){
 	
 	xhr.onload = function() {
     if (xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText);
-				if (data.err) console.log(data.err);
-				if (writeMessage(data)) {
-					appendQueryResult(data);
-				}	
-    }
+				var data = JSON.parse(xhr.responseText);
+				handleResponse(data);
+		}
 	};
 
 	var submitQuery = function(ev){
@@ -36,7 +33,7 @@ var setupAjax = function(){
 		//TODO: Have to find a robust URL when hosting this project one day
 		xhr.open('POST', 'http://localhost:7000/', true);
 		xhr.withCredentials = true;
-		xhr.setRequestHeader('Content-Type', 'application/json'); // send the plain text query
+		xhr.setRequestHeader('Content-Type', 'application/json');
 	
 		console.log("query: ", query)
 		xhr.send(JSON.stringify({ 
@@ -55,6 +52,30 @@ var setupAjax = function(){
 	runBtn.onclick = submitQuery;
 	saveBtn.onclick = submitQuery;
 	deleteBtn.onclick = submitQuery;
+}
+
+var handleResponse = function(data) {
+	if (data.err) console.log(data.err);
+	
+	/** TODO: find a better separation of concerns for writeMessage
+			because I'll also display a message, not in the same paragraph
+			(if I did, saving means that the user wouldn't see
+			the number of rows and columns and may resubmit the query)
+
+			Are messages generated on client or server side?
+	**/
+
+	if (data.type === 'Save') {
+		console.log(data.msg);
+	}
+
+	else if (data.type === 'Delete') {
+		console.log(data.msg);
+	}
+
+	else if (writeMessage(data)) {
+		appendQueryResult(data);
+	}
 }
 
 /** Complexity comes from the table headers being detached
@@ -151,7 +172,7 @@ var scrollVisibleHeader = function () {
 **/
 var initializeWriteMessage = function(){
 	var results = document.getElementById('results');
-	var successP = results.getElementsByTagName('p')[0];
+	var successP = results.getElementsByTagName('p')[0]; // currently I have a div as the children of results, fix later
 	var spans = successP.getElementsByTagName('span');
 
 	var errorP = document.createElement('p');
