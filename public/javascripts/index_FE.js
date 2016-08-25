@@ -19,32 +19,46 @@ var setupAjax = function(){
 				if (data.err) console.log(data.err);
 				if (writeMessage(data)) {
 					appendQueryResult(data);
-				}
-				
+				}	
     }
 	};
 
-	var form = document.getElementById('queryForm');
 	var submitQuery = function(ev){
-		ev.preventDefault();
-		
+		var type = ev.target.value; // 'Test Run' || 'Run' || 'Save' || 'Delete'
+
+		// Every type of submit except Delete needs the query
+		if (type !== 'Delete') {
+			var query = document.getElementById('message').value;
+		}
+	
+		var queryName = document.getElementById('queryname').value;
+
+		//TODO: Have to find a robust URL when hosting this project one day
 		xhr.open('POST', 'http://localhost:7000/', true);
 		xhr.withCredentials = true;
-		xhr.setRequestHeader('Content-Type', 'text/plain'); // send the plain text query
-		var query = document.getElementById('message').value;
+		xhr.setRequestHeader('Content-Type', 'application/json'); // send the plain text query
+	
 		console.log("query: ", query)
-		xhr.send(query);
+		xhr.send(JSON.stringify({ 
+			type: type,
+			query: query,
+			queryName: queryName
+		}));
 	}
-	
-	/** TODO: I want 4 form listeners: "test run", "run,", "delete", "save" 
-			and I want it to save text in the database, or delete it.
-			Test run does what I have it doing now--it doesn't interact with canvas.
-			Run however does.
-	**/
 
-	
-	form.addEventListener("submit", submitQuery);
+	var testRunBtn = document.getElementById('Test');
+	var runBtn = document.getElementById('Run');
+	var saveBtn = document.getElementById('Save');
+	var deleteBtn = document.getElementById('Delete');
 
+	testRunBtn.onclick = submitQuery;
+	runBtn.onclick = submitQuery;
+	saveBtn.onclick = submitQuery;
+	deleteBtn.onclick = submitQuery;
+}
+
+var hookupButtons = function() {
+	
 }
 
 /** Complexity comes from the table headers being detached
