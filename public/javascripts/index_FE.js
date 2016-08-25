@@ -57,10 +57,6 @@ var setupAjax = function(){
 	deleteBtn.onclick = submitQuery;
 }
 
-var hookupButtons = function() {
-	
-}
-
 /** Complexity comes from the table headers being detached
 		from the actual table
 **/
