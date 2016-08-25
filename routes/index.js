@@ -1,5 +1,3 @@
-
-
 var express = require('express');
 var router = express.Router();
 var pool = require('../pgConnPool');
@@ -10,6 +8,18 @@ router.get('/', function (req, res) {
     res.render('index.jade', {
         layout: false,
     });
+});
+
+/** Expects client to send a application/json request **/
+router.post('/', function (req, res) {
+    
+		/** So CONFUSING!: This line below DOES NOT throw a Reference Error. Just says Post 
+		500 Server Error. If it's in other places, I can get the reference error. 
+		What is up with the logging?
+		**/
+		//console.log(reqBody); 
+		handleQuery(req, res);
+
 });
 
 var handleError = function (err, res) {
@@ -42,39 +52,32 @@ var closeFunctionOnRes = function(res, fn) {
 	}
 }
 
-/** Expects client to send a application/json request **/
-router.post('/', function (req, res) {
-    
-		/** So CONFUSING!: This line below DOES NOT throw a Reference Error. Just says Post 
-		500 Server Error. If it's in other places, I can get the reference error. 
-		What is up with the logging?
-		**/
-		//console.log(reqBody); 
-		handleQuery(req, res);
-
-});
-
 var handleQuery = function(req, res) {
 
 	var body = req.body;
-	if (body.type === 'Save') {
-		// TODO: Save query
-	} else if (body.type === 'Delete') {
-		// TODO: Delete the query from the user's saved queries
-	} else if (body.type === 'Test Run') {
-		queryDB(req, res, body.query, customizeTestRunResult);		
-		
-	} else if (body.type === 'Run') {
-		queryDB(req, res, body.query, customizeRunResult);
-		// TODO: Define what to pass back to client for canvas interaction
-		// do that inside customizeRunResult which can send JSON 
-		// and let front end do logic based on JSON.
-	} else {
-		// TODO: Handle this on front end later
-		console.log("Invalid button action requested");
-		res.setHeader('Content-Type', 'application/json');
-		res.send({err: "Invalid button action requested"});	
+	switch(body.type) {
+		case 'Save':
+			// TODO: Save query
+			break;
+		case 'Delete':
+			// TODO: Delete the query from the user's saved queries
+			break;
+		case 'Test Run':
+			queryDB(req, res, body.query, customizeTestRunResult);
+			break;
+		case 'Run':
+			queryDB(req, res, body.query, customizeRunResult);
+			// TODO: Define what to pass back to client for canvas interaction
+			// do that inside customizeRunResult which can send JSON 
+			// and let front end do logic based on JSON.
+			break;
+		default:
+			// TODO: Handle this on front end later
+			console.log("Invalid button action requested");
+			res.setHeader('Content-Type', 'application/json');
+			res.send({err: "Invalid button action requested"});
 	}
+
 };
 
 //TODO: If the query returns too many rows, I need to truncate output
@@ -122,8 +125,6 @@ var customizeSaveResult = function(err, dbResult) {
 var customizeDeleteResult = function(err, dbResult) {
 	//TODO: Fill in
 }
-
-
 
 var queryDB = function(req, res, query, callback) {
 	console.log("Query: ", query);
